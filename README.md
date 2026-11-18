@@ -64,6 +64,44 @@ Open `https://localhost` and sign in. To use the pre-built signed images instead
 
 ---
 
+## How PATHOS compares
+
+There are good tools in this space. This is how PATHOS differs, so you can pick what fits.
+
+| | **PATHOS** | DefectDojo | OWASP Dependency-Track | GitHub Advanced Security | Commercial ASPM suites¹ |
+|---|---|---|---|---|---|
+| Licence | Apache-2.0 | BSD-3-Clause (Pro edition paid) | Apache-2.0 | Paid, per active committer | Paid, commercial |
+| Self-hosted | ✅ Docker Compose | ✅ | ✅ | GitHub Enterprise Server only | Mostly SaaS |
+| Air-gapped / offline | ✅ Offline mode and database bundles | ✅ | ✅ (with mirrors) | ❌ | Rarely |
+| Runs the scanners for you | ✅ Built-in isolated scan workers | ❌ Imports results | ❌ Analyses SBOMs | ✅ CodeQL, secret scanning | ✅ |
+| Source scanning (SAST, secrets, IaC) | ✅ | Via imports | ❌ | ✅ | ✅ |
+| Dependencies and SBOMs | ✅ Import and export, CycloneDX and SPDX | Via imports | ✅ Core strength | ✅ Dependabot | ✅ |
+| Containers, web apps and APIs (DAST) | ✅ Trivy, Nuclei | Via imports | ❌ | ❌ | Varies |
+| GitHub, GitLab, Bitbucket and Azure DevOps | ✅ All four | Via imports and CI | Via CI | GitHub only | ✅ |
+| Contextual risk (EPSS, KEV, reachability, business context) | ✅ Explainable 0–100 score | Partial | EPSS, policies | Partial | ✅ |
+| Structured human review with independent approval | ✅ Human Eye | Risk acceptance | Audit and suppression | Dismissal | Varies |
+| AI with a **local model** option | ✅ Ollama, or Anthropic, OpenAI, xAI, always human-approved | ❌ | ❌ | Cloud only | Cloud only |
+| MCP server for AI assistants | ✅ | ❌ | ❌ | ❌ | Varies |
+
+<sub>Based on each project's public documentation as of November 2026; features change, so check the vendor before deciding. ¹ For example Snyk, Checkmarx One, Apiiro, ArmorCode, Cycode. Their offerings differ widely.</sub>
+
+### Why teams choose PATHOS
+
+- **One platform, end to end, with no licence fees.** Scanning, findings, SBOMs, risk, human review, policies, compliance and reporting in one place, instead of a scanner plus an aggregator plus a spreadsheet.
+- **Your code never leaves your servers.** Self-hosted by design, offline mode for air-gapped networks, and AI that can run entirely on a local model.
+- **Risk you can explain.** Every score shows its factors (severity, EPSS, CISA KEV, reachability, exposure, criticality), so prioritisation can be defended in an audit.
+- **People stay in charge.** AI suggests; people decide. Human Eye adds evidence, four-eyes approval and an immutable history.
+- **Open and verifiable.** Read every line, build it yourself, and verify every signed release.
+
+### Where others are stronger today
+
+- **DefectDojo** has years of community use and parsers for hundreds of tools.
+- **Dependency-Track** goes deeper on SBOM portfolio and policy management.
+- **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
+- **PATHOS 1.0** is new. QuditMind can offer support, and issues and pull requests are welcome.
+
+---
+
 ## Is it safe to use?
 
 We build a security product, so we hold it to the standard we ask of others. Each point below can be checked independently.
