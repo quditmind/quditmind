@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-labelledby="t d">
+  <title id="t">QuditMind</title>
+  <desc id="d">QuditMind Private Limited: open-source application security software</desc>
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="430" y2="430">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0B1020"/>
+      <stop offset="1" stop-color="#111936"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#334155" fill-opacity=".55"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="320" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="320" rx="24" fill="url(#dots)"/>
+  <g transform="translate(96 72) scale(0.34)">
+    <circle cx="246" cy="246" r="138" fill="none" stroke="url(#g)" stroke-width="40"/>
+    <path d="M326 326 L404 404" stroke="url(#g)" stroke-width="44" stroke-linecap="round"/>
+    <circle cx="246" cy="246" r="68" fill="none" stroke="#94A3B8" stroke-opacity=".45" stroke-width="6" stroke-dasharray="6 12"/>
+    <circle cx="246" cy="178" r="20" fill="#A5B4FC"/>
+    <circle cx="305" cy="280" r="20" fill="#5EEAD4"/>
+    <circle cx="187" cy="280" r="20" fill="#818CF8"/>
+    <circle cx="246" cy="246" r="12" fill="#F8FAFC"/>
+  </g>
+  <text x="290" y="158" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#F8FAFC" letter-spacing="-1">Qudit<tspan fill="#5EEAD4">Mind</tspan></text>
+  <text x="292" y="206" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="26" fill="#CBD5E1">Open-source application security, built in the open.</text>
+  <text x="292" y="250" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18" fill="#94A3B8" letter-spacing="2">QUDITMIND PRIVATE LIMITED · INDIA</text>
+  <g transform="translate(940 118)">
+    <rect width="250" height="84" rx="16" fill="#0F172A" stroke="#334155"/>
+    <text x="24" y="38" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#F8FAFC">PATHOS <tspan fill="#5EEAD4">1.0</tspan></text>
+    <text x="24" y="64" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="15" fill="#94A3B8">Application security posture</text>
+  </g>
+</svg>

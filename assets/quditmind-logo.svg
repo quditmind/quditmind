@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="t">
+  <title id="t">QuditMind logo</title>
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="100" y1="100" x2="430" y2="430">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0B1020"/>
+  <!-- Q ring -->
+  <circle cx="246" cy="246" r="138" fill="none" stroke="url(#g)" stroke-width="40"/>
+  <!-- Q tail -->
+  <path d="M326 326 L404 404" stroke="url(#g)" stroke-width="44" stroke-linecap="round"/>
+  <!-- inner orbit: the qudit's states -->
+  <circle cx="246" cy="246" r="68" fill="none" stroke="#94A3B8" stroke-opacity=".45" stroke-width="6" stroke-dasharray="6 12"/>
+  <circle cx="246" cy="178" r="20" fill="#A5B4FC"/>
+  <circle cx="305" cy="280" r="20" fill="#5EEAD4"/>
+  <circle cx="187" cy="280" r="20" fill="#818CF8"/>
+  <circle cx="246" cy="246" r="12" fill="#F8FAFC"/>
+</svg>
