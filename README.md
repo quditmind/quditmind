@@ -41,12 +41,15 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
   <img src="https://raw.githubusercontent.com/quditmind/pathos/v1.0.0/docs/user-guide/images/findings.png" alt="PATHOS findings list" width="49%">
 </p>
 
-- **Scanning:** Gitleaks, Opengrep, Trivy, Grype, OSV-Scanner, Checkov, zizmor and actionlint on repositories; container images, web applications and APIs (Nuclei), build artifacts and SBOMs as scan targets; your own tools as declarative plugins.
+- **Scanning:** Gitleaks, Opengrep, Trivy, Grype, OSV-Scanner, Checkov, zizmor and actionlint on repositories; malware (ClamAV), licence compliance, binary hardening, framework misconfiguration, end-of-life runtimes, API endpoint discovery and signature verification; container images, web applications and APIs (Nuclei), build artifacts and SBOMs as scan targets; your own tools as declarative plugins.
+- **Import from other tools:** 25 report formats (SARIF, Burp, ZAP, SonarQube, Semgrep, Snyk, Checkmarx, Nessus and more), with deduplication across sources.
+- **Fix it, don't just find it:** automatic dependency-upgrade pull requests, secret push protection hooks, VEX statements per application release and detection of security-relevant code changes.
 - **Repositories and assets:** GitHub, GitLab, Bitbucket Cloud and Azure DevOps, or local uploads; ownership, applications and business context.
 - **Risk:** contextual 0–100 risk scores with EPSS, CISA KEV and OSV, reachability, attack paths, blast radius and posture by application, team or region.
 - **Human Eye:** manual expert review with evidence, independent approval and full history.
 - **AI, under your control:** AI-assisted triage and an AI Security Analyst with Anthropic, OpenAI, xAI or a **local model (Ollama)**. AI never decides on its own; people approve.
 - **Governance:** security policies, SLAs, risk acceptance, compliance views (OWASP Top 10, ASVS, PCI DSS, ISO 27001, SOC 2), SSO with SAML or OIDC, MFA and an audit log.
+- **Developer workflow:** the `pathos` command-line tool, ready-made CI templates (GitHub Actions, GitLab CI, Azure Pipelines, Jenkins, pre-commit) and a VS Code extension.
 - **Integrations:** REST API, webhooks (Slack, Microsoft Teams), Jira, ServiceNow, pull request checks and an MCP server.
 - **Runs anywhere Docker runs**, including fully **air-gapped** installations.
 
@@ -55,7 +58,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 The only requirement is Docker with the Compose plugin.
 
 ```bash
-git clone --branch v1.0.0 https://github.com/quditmind/pathos.git && cd pathos
+git clone --branch v1.1.0 https://github.com/quditmind/pathos.git && cd pathos
 ./deploy/scripts/install.sh      # generates .env with random secrets and prints the admin login
 docker compose up -d --wait
 ```
@@ -75,7 +78,11 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 | Air-gapped / offline | ✅ Offline mode and database bundles | ✅ | ✅ (with mirrors) | ❌ | Rarely |
 | Runs the scanners for you | ✅ Built-in isolated scan workers | ❌ Imports results | ❌ Analyses SBOMs | ✅ CodeQL, secret scanning | ✅ |
 | Source scanning (SAST, secrets, IaC) | ✅ | Via imports | ❌ | ✅ | ✅ |
-| Dependencies and SBOMs | ✅ Import and export, CycloneDX and SPDX | Via imports | ✅ Core strength | ✅ Dependabot | ✅ |
+| Imports results from other tools | ✅ 25 formats | ✅ Core strength (hundreds of parsers) | SBOMs only | SARIF | ✅ |
+| Automatic fix pull requests | ✅ Dependency upgrades | ❌ | ❌ | ✅ Dependabot | ✅ |
+| Secret push protection | ✅ Pre-commit and pre-receive hooks | ❌ | ❌ | ✅ | Varies |
+| CLI, CI templates and IDE extension | ✅ CLI, 5 CI systems, VS Code | API and CI | API and CI | ✅ | ✅ |
+| Dependencies and SBOMs | ✅ Import and export, CycloneDX and SPDX, VEX | Via imports | ✅ Core strength | ✅ Dependabot | ✅ |
 | Containers, web apps and APIs (DAST) | ✅ Trivy, Nuclei | Via imports | ❌ | ❌ | Varies |
 | GitHub, GitLab, Bitbucket and Azure DevOps | ✅ All four | Via imports and CI | Via CI | GitHub only | ✅ |
 | Contextual risk (EPSS, KEV, reachability, business context) | ✅ Explainable 0–100 score | Partial | EPSS, policies | Partial | ✅ |
@@ -98,7 +105,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 - **DefectDojo** has years of community use and parsers for hundreds of tools.
 - **Dependency-Track** goes deeper on SBOM portfolio and policy management.
 - **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
-- **PATHOS 1.0** is new. QuditMind can offer support, and issues and pull requests are welcome.
+- **PATHOS** is new (1.1 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
 
 ---
 
@@ -119,8 +126,8 @@ We build a security product, so we hold it to the standard we ask of others. Eac
 Verify a release image before you deploy it:
 
 ```bash
-cosign verify ghcr.io/quditmind/pathos:1.0.0 \
-  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v1.0.0" \
+cosign verify ghcr.io/quditmind/pathos:1.1.0 \
+  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v1.1.0" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
