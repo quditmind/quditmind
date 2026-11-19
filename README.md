@@ -44,6 +44,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 - **25 scan types:** SAST, DAST, SCA, secrets, IaC, containers, API security, mobile (Android and iOS), fuzzing, licences, SBOM, malware, code-quality security, supply chain, cryptography, configuration, CI/CD pipelines, binaries, AI/LLM, runtime, compliance, database security, licence policy, IAST (imported) and manual review, with a live coverage view.
 - **Runs the tools itself:** 80 open-source scanners in isolated, signed worker images (core plus opt-in SAST, IaC, SCA, DAST, mobile, binary, AI and fuzzing images), including Gitleaks, Opengrep, Semgrep, Bandit, gosec, TruffleHog, Trivy, Grype, OSV-Scanner, govulncheck, Checkov, KICS, Kubescape, OWASP ZAP, Wapiti, testssl.sh, mobsfscan, capa, YARA-X, ModelScan, garak and promptfoo. Attack tools run only on targets you have authorized for intrusive testing.
 - **Import from other tools:** 232 report formats from 207 tools (SARIF producers such as CodeQL, Fortify, Veracode, Checkmarx, Snyk, SonarQube, Burp, Acunetix, Nessus, Qualys, Wiz, Prisma Cloud, AWS Security Hub, Contrast and more), with deduplication across sources.
+- **Proof, not just findings:** function-level reachability with the call path to the vulnerable function; AI-proposed fixes that are applied, re-scanned and (optionally) tested in a network-less sandbox before a person can open a pull request; opt-in live checks of whether a leaked key still works; and Kubernetes and registry context, so findings in deployed, internet-exposed workloads rise to the top.
 - **Fix it, don't just find it:** automatic dependency-upgrade pull requests, secret push protection hooks, VEX statements per application release and detection of security-relevant code changes.
 - **Repositories and assets:** GitHub, GitLab, Bitbucket Cloud and Azure DevOps, or local uploads; ownership, applications and business context.
 - **Risk:** contextual 0–100 risk scores with EPSS, CISA KEV and OSV, reachability, attack paths, blast radius and posture by application, team or region.
@@ -59,7 +60,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 The only requirement is Docker with the Compose plugin.
 
 ```bash
-git clone --branch v2.0.0 https://github.com/quditmind/pathos.git && cd pathos
+git clone --branch v2.1.0 https://github.com/quditmind/pathos.git && cd pathos
 ./deploy/scripts/install.sh      # generates .env with random secrets and prints the admin login
 docker compose up -d --wait
 ```
@@ -87,7 +88,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 | Containers, web apps and APIs (DAST) | ✅ Trivy, Nuclei, OWASP ZAP, Wapiti, Schemathesis | Via imports | ❌ | ❌ | Varies |
 | Mobile apps, binaries and AI/LLM endpoints | ✅ APK/IPA analysis, CVE Binary Tool, capa, ModelScan, garak | Via imports | ❌ | ❌ | Varies |
 | GitHub, GitLab, Bitbucket and Azure DevOps | ✅ All four | Via imports and CI | Via CI | GitHub only | ✅ |
-| Contextual risk (EPSS, KEV, reachability, business context) | ✅ Explainable 0–100 score | Partial | EPSS, policies | Partial | ✅ |
+| Contextual risk (EPSS, KEV, reachability, business context) | ✅ Explainable 0–100 score, function-level reachability, deployment and exposure | Partial | EPSS, policies | Partial | ✅ |
 | Structured human review with independent approval | ✅ Human Eye | Risk acceptance | Audit and suppression | Dismissal | Varies |
 | AI with a **local model** option | ✅ Ollama, or Anthropic, OpenAI, xAI, always human-approved | ❌ | ❌ | Cloud only | Cloud only |
 | MCP server for AI assistants | ✅ | ❌ | ❌ | ❌ | Varies |
@@ -107,7 +108,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 - **DefectDojo** has years of community use and parsers for hundreds of tools.
 - **Dependency-Track** goes deeper on SBOM portfolio and policy management.
 - **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
-- **PATHOS** is new (2.0.0 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
+- **PATHOS** is new (2.1.0 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
 
 ---
 
@@ -128,8 +129,8 @@ We build a security product, so we hold it to the standard we ask of others. Eac
 Verify a release image before you deploy it:
 
 ```bash
-cosign verify ghcr.io/quditmind/pathos:2.0.0 \
-  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v2.0.0" \
+cosign verify ghcr.io/quditmind/pathos:2.1.0 \
+  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v2.1.0" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
