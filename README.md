@@ -41,8 +41,9 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
   <img src="https://raw.githubusercontent.com/quditmind/pathos/v1.0.0/docs/user-guide/images/findings.png" alt="PATHOS findings list" width="49%">
 </p>
 
-- **Scanning:** Gitleaks, Opengrep, Trivy, Grype, OSV-Scanner, Checkov, zizmor and actionlint on repositories; malware (ClamAV), licence compliance, binary hardening, framework misconfiguration, end-of-life runtimes, API endpoint discovery and signature verification; container images, web applications and APIs (Nuclei), build artifacts and SBOMs as scan targets; your own tools as declarative plugins.
-- **Import from other tools:** 25 report formats (SARIF, Burp, ZAP, SonarQube, Semgrep, Snyk, Checkmarx, Nessus and more), with deduplication across sources.
+- **25 scan types:** SAST, DAST, SCA, secrets, IaC, containers, API security, mobile (Android and iOS), fuzzing, licences, SBOM, malware, code-quality security, supply chain, cryptography, configuration, CI/CD pipelines, binaries, AI/LLM, runtime, compliance, database security, licence policy, IAST (imported) and manual review, with a live coverage view.
+- **Runs the tools itself:** 80 open-source scanners in isolated, signed worker images (core plus opt-in SAST, IaC, SCA, DAST, mobile, binary, AI and fuzzing images), including Gitleaks, Opengrep, Semgrep, Bandit, gosec, TruffleHog, Trivy, Grype, OSV-Scanner, govulncheck, Checkov, KICS, Kubescape, OWASP ZAP, Wapiti, testssl.sh, mobsfscan, capa, YARA-X, ModelScan, garak and promptfoo. Attack tools run only on targets you have authorized for intrusive testing.
+- **Import from other tools:** 232 report formats from 207 tools (SARIF producers such as CodeQL, Fortify, Veracode, Checkmarx, Snyk, SonarQube, Burp, Acunetix, Nessus, Qualys, Wiz, Prisma Cloud, AWS Security Hub, Contrast and more), with deduplication across sources.
 - **Fix it, don't just find it:** automatic dependency-upgrade pull requests, secret push protection hooks, VEX statements per application release and detection of security-relevant code changes.
 - **Repositories and assets:** GitHub, GitLab, Bitbucket Cloud and Azure DevOps, or local uploads; ownership, applications and business context.
 - **Risk:** contextual 0–100 risk scores with EPSS, CISA KEV and OSV, reachability, attack paths, blast radius and posture by application, team or region.
@@ -58,7 +59,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 The only requirement is Docker with the Compose plugin.
 
 ```bash
-git clone --branch v1.1.1 https://github.com/quditmind/pathos.git && cd pathos
+git clone --branch v2.0.0 https://github.com/quditmind/pathos.git && cd pathos
 ./deploy/scripts/install.sh      # generates .env with random secrets and prints the admin login
 docker compose up -d --wait
 ```
@@ -76,14 +77,15 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 | Licence | Apache-2.0 | BSD-3-Clause (Pro edition paid) | Apache-2.0 | Paid, per active committer | Paid, commercial |
 | Self-hosted | ✅ Docker Compose | ✅ | ✅ | GitHub Enterprise Server only | Mostly SaaS |
 | Air-gapped / offline | ✅ Offline mode and database bundles | ✅ | ✅ (with mirrors) | ❌ | Rarely |
-| Runs the scanners for you | ✅ Built-in isolated scan workers | ❌ Imports results | ❌ Analyses SBOMs | ✅ CodeQL, secret scanning | ✅ |
+| Runs the scanners for you | ✅ 80 scanners in isolated, signed worker images | ❌ Imports results | ❌ Analyses SBOMs | ✅ CodeQL, secret scanning | ✅ |
 | Source scanning (SAST, secrets, IaC) | ✅ | Via imports | ❌ | ✅ | ✅ |
-| Imports results from other tools | ✅ 25 formats | ✅ Core strength (hundreds of parsers) | SBOMs only | SARIF | ✅ |
+| Imports results from other tools | ✅ 232 formats from 207 tools | ✅ Core strength (hundreds of parsers) | SBOMs only | SARIF | ✅ |
 | Automatic fix pull requests | ✅ Dependency upgrades | ❌ | ❌ | ✅ Dependabot | ✅ |
 | Secret push protection | ✅ Pre-commit and pre-receive hooks | ❌ | ❌ | ✅ | Varies |
 | CLI, CI templates and IDE extension | ✅ CLI, 5 CI systems, VS Code | API and CI | API and CI | ✅ | ✅ |
 | Dependencies and SBOMs | ✅ Import and export, CycloneDX and SPDX, VEX | Via imports | ✅ Core strength | ✅ Dependabot | ✅ |
-| Containers, web apps and APIs (DAST) | ✅ Trivy, Nuclei | Via imports | ❌ | ❌ | Varies |
+| Containers, web apps and APIs (DAST) | ✅ Trivy, Nuclei, OWASP ZAP, Wapiti, Schemathesis | Via imports | ❌ | ❌ | Varies |
+| Mobile apps, binaries and AI/LLM endpoints | ✅ APK/IPA analysis, CVE Binary Tool, capa, ModelScan, garak | Via imports | ❌ | ❌ | Varies |
 | GitHub, GitLab, Bitbucket and Azure DevOps | ✅ All four | Via imports and CI | Via CI | GitHub only | ✅ |
 | Contextual risk (EPSS, KEV, reachability, business context) | ✅ Explainable 0–100 score | Partial | EPSS, policies | Partial | ✅ |
 | Structured human review with independent approval | ✅ Human Eye | Risk acceptance | Audit and suppression | Dismissal | Varies |
@@ -105,7 +107,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 - **DefectDojo** has years of community use and parsers for hundreds of tools.
 - **Dependency-Track** goes deeper on SBOM portfolio and policy management.
 - **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
-- **PATHOS** is new (1.1.1 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
+- **PATHOS** is new (2.0.0 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
 
 ---
 
@@ -126,8 +128,8 @@ We build a security product, so we hold it to the standard we ask of others. Eac
 Verify a release image before you deploy it:
 
 ```bash
-cosign verify ghcr.io/quditmind/pathos:1.1.1 \
-  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v1.1.1" \
+cosign verify ghcr.io/quditmind/pathos:2.0.0 \
+  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v2.0.0" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
