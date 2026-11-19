@@ -58,7 +58,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 The only requirement is Docker with the Compose plugin.
 
 ```bash
-git clone --branch v1.1.0 https://github.com/quditmind/pathos.git && cd pathos
+git clone --branch v1.1.1 https://github.com/quditmind/pathos.git && cd pathos
 ./deploy/scripts/install.sh      # generates .env with random secrets and prints the admin login
 docker compose up -d --wait
 ```
@@ -105,7 +105,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 - **DefectDojo** has years of community use and parsers for hundreds of tools.
 - **Dependency-Track** goes deeper on SBOM portfolio and policy management.
 - **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
-- **PATHOS** is new (1.1 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
+- **PATHOS** is new (1.1.1 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
 
 ---
 
@@ -126,8 +126,8 @@ We build a security product, so we hold it to the standard we ask of others. Eac
 Verify a release image before you deploy it:
 
 ```bash
-cosign verify ghcr.io/quditmind/pathos:1.1.0 \
-  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v1.1.0" \
+cosign verify ghcr.io/quditmind/pathos:1.1.1 \
+  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v1.1.1" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
