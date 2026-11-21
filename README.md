@@ -41,8 +41,9 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
   <img src="https://raw.githubusercontent.com/quditmind/pathos/v1.0.0/docs/user-guide/images/findings.png" alt="PATHOS findings list" width="49%">
 </p>
 
+- **New in 3.0: the application security lifecycle.** Nine phases from inventory and onboarding through CodeGraph discovery, threat modelling, reverse engineering of your own builds, scan profiles by kind of check, AI intelligence with an evidence record for every AI decision, a remediation workspace with security gates, and continuous monitoring. Each new module is behind a feature flag, off until an administrator turns it on.
 - **25 scan types:** SAST, DAST, SCA, secrets, IaC, containers, API security, mobile (Android and iOS), fuzzing, licences, SBOM, malware, code-quality security, supply chain, cryptography, configuration, CI/CD pipelines, binaries, AI/LLM, runtime, compliance, database security, licence policy, IAST (imported) and manual review, with a live coverage view.
-- **Runs the tools itself:** 80 open-source scanners in isolated, signed worker images (core plus opt-in SAST, IaC, SCA, DAST, mobile, binary, AI and fuzzing images), including Gitleaks, Opengrep, Semgrep, Bandit, gosec, TruffleHog, Trivy, Grype, OSV-Scanner, govulncheck, Checkov, KICS, Kubescape, OWASP ZAP, Wapiti, testssl.sh, mobsfscan, capa, YARA-X, ModelScan, garak and promptfoo. Attack tools run only on targets you have authorized for intrusive testing.
+- **Runs the tools itself:** 83 of 100 catalogued scanner integrations run in isolated, signed worker images (core plus opt-in SAST, IaC, SCA, DAST, mobile, binary, AI, fuzzing, CodeGraph discovery and reverse-engineering images), including Gitleaks, Opengrep, Semgrep, Bandit, gosec, TruffleHog, Trivy, Grype, OSV-Scanner, govulncheck, Checkov, KICS, Kubescape, OWASP ZAP, Wapiti, testssl.sh, mobsfscan, capa, YARA-X, ModelScan, garak and promptfoo. Attack tools run only on targets you have authorized for intrusive testing.
 - **Import from other tools:** 232 report formats from 207 tools (SARIF producers such as CodeQL, Fortify, Veracode, Checkmarx, Snyk, SonarQube, Burp, Acunetix, Nessus, Qualys, Wiz, Prisma Cloud, AWS Security Hub, Contrast and more), with deduplication across sources.
 - **Proof, not just findings:** function-level reachability with the call path to the vulnerable function; AI-proposed fixes that are applied, re-scanned and (optionally) tested in a network-less sandbox before a person can open a pull request; opt-in live checks of whether a leaked key still works; and Kubernetes and registry context, so findings in deployed, internet-exposed workloads rise to the top.
 - **Built for teams and providers:** optional multi-tenancy (several isolated organizations per installation, enforced by the application and by PostgreSQL row-level security), IDE plugins for VS Code and JetBrains, and published [benchmarks](https://github.com/quditmind/pathos/blob/main/docs/BENCHMARKS.md) and [performance measurements](https://github.com/quditmind/pathos/blob/main/docs/PERFORMANCE.md).
@@ -61,7 +62,7 @@ PATHOS brings source-code scanning, findings management, vulnerability intellige
 The only requirement is Docker with the Compose plugin.
 
 ```bash
-git clone --branch v2.2.3 https://github.com/quditmind/pathos.git && cd pathos
+git clone --branch v3.0.1 https://github.com/quditmind/pathos.git && cd pathos
 ./deploy/scripts/install.sh      # generates .env with random secrets and prints the admin login
 docker compose up -d --wait
 ```
@@ -109,7 +110,7 @@ There are good tools in this space. This is how PATHOS differs, so you can pick 
 - **DefectDojo** has years of community use and parsers for hundreds of tools.
 - **Dependency-Track** goes deeper on SBOM portfolio and policy management.
 - **Commercial suites** bring proprietary analysis engines, managed hosting and contractual support.
-- **PATHOS** is new (2.2.3 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
+- **PATHOS** is new (3.0.1 released November 2026). QuditMind can offer support, and issues and pull requests are welcome.
 - **Our own measurements show where PATHOS is weak today:** on the OWASP Benchmark for Java, PATHOS's bundled tools together score +40 (73% of real flaws found, 33% false alarms), and its own rules alone are weak; on the Python benchmark 9 of 14 flaw types are not yet detected. Secrets (Gitleaks: 88% found, no false alarms) and dependency scanning (57 of 57 known vulnerabilities) are strong. Full method and numbers: [BENCHMARKS.md](https://github.com/quditmind/pathos/blob/main/docs/BENCHMARKS.md).
 
 ---
@@ -131,8 +132,8 @@ We build a security product, so we hold it to the standard we ask of others. Eac
 Verify a release image before you deploy it:
 
 ```bash
-cosign verify ghcr.io/quditmind/pathos:2.2.3 \
-  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v2.2.3" \
+cosign verify ghcr.io/quditmind/pathos:3.0.1 \
+  --certificate-identity "https://github.com/quditmind/pathos/.github/workflows/release.yml@refs/tags/v3.0.1" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
